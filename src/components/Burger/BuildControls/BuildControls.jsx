@@ -12,7 +12,6 @@ const CONTROLS = [
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
     {CONTROLS.map(ctr => {
-      console.log("props.addedPrice:", props)
       return <BuildControl
         key={ctr.label}
         label={ctr.label}
