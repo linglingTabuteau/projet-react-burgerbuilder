@@ -3,9 +3,9 @@ import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const Burger = (props) => {
-  const transferedIngredients = Object.keys(props.ingredients).map(
+  let transferedIngredients = Object.keys(props.ingredients).map(
     keyIngredient => {
-      // _reprensents no value
+      // _ reprensents no value; accessing value by: objet[keyIngredient]
       return [...Array(props.ingredients[keyIngredient])].map(
         (_, i) => {
           return (<BurgerIngredient
@@ -15,8 +15,19 @@ const Burger = (props) => {
         }
       )
     }
-  );
-  
+  )
+   // merge all the el into one arr (transferIngredients)
+  .reduce((arr, el) => {
+    console.log("arr.contact(el)", arr.concat(el));
+    return arr.concat(el);
+  }, []);
+
+  console.log("transferIng:", transferedIngredients);
+
+  if (transferedIngredients.length === 0) {
+    transferedIngredients = <p>Please add the ingredients</p>
+  }
+
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
