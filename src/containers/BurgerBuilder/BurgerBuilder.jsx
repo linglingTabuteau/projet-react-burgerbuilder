@@ -3,6 +3,7 @@ import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
+// use capital letters for public use of const variables
 const INGREDIENTS_PRICE = {
   salad: 0.2,
   bacon: 0.4,
@@ -39,7 +40,8 @@ class BurgerBuilder extends Component {
     updatedIngredients[type] = updatedCounts;
 
     const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice + INGREDIENTS_PRICE;
+    const priceAddtion = INGREDIENTS_PRICE[type]
+    const newPrice = oldPrice + priceAddtion;
 
     this.setState({
       ingredients: updatedIngredients,
@@ -47,18 +49,42 @@ class BurgerBuilder extends Component {
     })
   }
 
-  removeIngredientsHandler = () => {
+  removeIngredientsHandler = (type) => {
+    const oldCounts = this.state.ingredients[type];
+    if (oldCounts <= 0) {
+      // noting return if oldCounts <= 0
+      return;
+    }
+    const updatedCounts = oldCounts - 1;
+    const updatedIngredients = { ...this.state.ingredients };
+    updatedIngredients[type] = updatedCounts;
+
+    const oldPrice = this.state.totalPrice;
+    const priceDeduction = INGREDIENTS_PRICE[type];
+    const newPrice = oldPrice - priceDeduction;
+
+    this.setState({
+      ingredients: updatedIngredients,
+      totalPrice: newPrice,
+    })
 
   }
 
   render() {
+    const disableInfo = { ...this.state.ingredients };
+    for (let key in disableInfo) {
+      disableInfo[key] = disableInfo[key] <= 0
+    }
+
     return (
       <Aux>
         <Burger
           ingredients={this.state.ingredients}
         />
         <BuildControls
-        addedPrice = {this.addIngredientsHandler}
+          addedIngredients={this.addIngredientsHandler}
+          removedIngredients={this.removeIngredientsHandler}
+          disabled={disableInfo}
         />
       </Aux>
     )
