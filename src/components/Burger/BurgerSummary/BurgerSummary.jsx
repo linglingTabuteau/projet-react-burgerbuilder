@@ -20,7 +20,7 @@ const BurgerSummary = (props) => {
         {ingredientsSummary}
       </ul>
       <p>constinue to check out?</p>
-      <p>Total Price:{props.totalPrice}</p>
+      <p>Total Price:{props.totalPrice.toFixed(2)}</p>
     </Aux>
   );
 }

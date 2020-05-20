@@ -28,6 +28,7 @@ const buildControls = (props) => (
       // onClick={props.updatePurchase}
       // if not props.purchseable by using ! => disabled the button
       disabled={!props.purchaseable}
+      onClick={props.ordered}
     >
       ORDER NOW</button>
   </div>
