@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import BurgerSummary from '../../components/Burger/BurgerSummary/BurgerSummary';
 
 // use capital letters for public use of const variables
 const INGREDIENTS_PRICE = {
@@ -100,6 +102,12 @@ class BurgerBuilder extends Component {
     console.log("purchaseAble:", this.state.purchaseable);
     return (
       <Aux>
+          <Modal>
+            <BurgerSummary
+              ingredients={this.state.ingredients}
+              totalPrice={this.state.totalPrice}
+            />
+          </Modal>
         <Burger
           ingredients={this.state.ingredients}
         />
