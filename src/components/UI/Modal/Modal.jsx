@@ -3,11 +3,12 @@ import classes from './Modal.module.css';
 import Aux from '../../../hoc/Aux';
 import Backdrop from '../Backdrop/Backdrop';
 
+
 const Modal = (props) => (
   <Aux>
     <Backdrop
       show={props.show}
-      modalClosed={props.modalClosed}
+      clicked={props.modalClosed}
     />
     <div
       className={classes.Modal}
