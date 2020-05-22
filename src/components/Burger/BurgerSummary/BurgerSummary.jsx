@@ -20,12 +20,12 @@ const BurgerSummary = (props) => {
       <ul>
         {ingredientsSummary}
       </ul>
-      <p>Total Price:{props.totalPrice.toFixed(2)}</p>
+      <p><strong>Total Price: {props.totalPrice.toFixed(2)}</strong></p>
       <Button
-        buttonType='Success'
+        btnType='Success'
         clicked={props.purchaseContinue}>Continue</Button>
     <Button
-      buttonType='Danger'
+      btnType='Danger'
       clicked={props.purchaseCancel}>cancel</Button>
     </Aux >
   );
