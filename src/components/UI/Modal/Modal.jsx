@@ -8,7 +8,7 @@ const Modal = (props) => (
   <Aux>
     <Backdrop
       show={props.show}
-      clicked={props.modalClosed}
+      modalClosed={props.modalClosed}
     />
     <div
       className={classes.Modal}
