@@ -7,22 +7,19 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 console.log("classes:", classes);
 class Layout extends Component {
   state = {
-    show: false,
+    showSideDrawer: false,
   }
 
   closeSideDrawerHandler = () => {
     this.setState({
-      show: !this.state.show
+      showSideDrawer: !this.state.showSideDrawer
     })
   }
 
   sideDrawerToggleHandler = () => {
-    console.log("toggle:");
-    this.setState((prevState, props) => {
-      console.log("propos:", props);
-      console.log("!presvstate:", !prevState.show);
+    this.setState((prevState) => {
       return {
-        show: !prevState.show
+        showSideDrawer: !prevState.showSideDrawer
       }
 
     })
@@ -32,7 +29,7 @@ class Layout extends Component {
     return (
       <Aux>
         <Toolbar sideDrawerToggle={this.sideDrawerToggleHandler} />
-        <SideDrawer show={this.state.show} closeSideDrawer={this.closeSideDrawerHandler} />
+        <SideDrawer show={this.state.showSideDrawer} closeSideDrawer={this.closeSideDrawerHandler} />
         <main className={classes.Content}>
           {this.props.children}
         </main>
