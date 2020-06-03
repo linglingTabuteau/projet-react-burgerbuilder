@@ -6,8 +6,9 @@ import Backdrop from '../Backdrop/Backdrop';
 class Modal extends Component {
 
   // life cycle (sholdComponentUpdate) below to improve performances
+  // adding: this.props.children !== this.nextProps.children; in order to update Modal when children updates
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.show !== nextProps.show;
+    return this.props.show !== nextProps.show || this.props.children !== nextProps.children;
   }
 
   componentDidUpdate() {
