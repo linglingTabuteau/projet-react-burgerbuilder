@@ -5,7 +5,9 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import BurgerSummary from '../../components/Burger/BurgerSummary/BurgerSummary';
 import axios from '../../axios-orders';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
+
 
 // use capital letters for public use of const variables
 const INGREDIENTS_PRICE = {
@@ -47,7 +49,6 @@ class BurgerBuilder extends Component {
       .map(igKey => updatedIngredients[igKey]
       )
       .reduce((sum, el) => { return sum + el }, 0);
-    console.log("igsum:", ingredientSum);
     this.setState({
       // checks if purchaseable State is false or true; ingredientSum > 0 returns a boolean
       purchaseable: ingredientSum > 0
@@ -125,13 +126,11 @@ class BurgerBuilder extends Component {
     }
     this.setState({ loading: true })
     try {
-      axios.post('/orders.json', order)
+      // import to add .json in the end of url to send data to firebase
+      axios.post('/orders', order)
         // .then(response => console.log("response puchaeContinueHandler:", response))
         .then(res => {
-          if (res.status === 200) {
-            this.setState({ loading: false, purchasing: false })
-            alert('order passed')
-          }
+          this.setState({ loading: false, purchasing: false })
         })
     } catch (error) {
       console.log('errorPost:', error);
@@ -184,4 +183,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);

@@ -18,7 +18,6 @@ const Burger = (props) => {
   )
    // merge all the el into one arr (transferIngredients)
   .reduce((arr, el) => {
-    console.log("arr.contact(el)", arr.concat(el));
     return arr.concat(el);
   }, []);
 
