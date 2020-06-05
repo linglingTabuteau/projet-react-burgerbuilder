@@ -9,7 +9,9 @@ const withErrorHandler = (WrappedComponent, axios) => {
     state = {
       error: null,
     }
-    componentDidMount() {
+
+    // use componentWillMount because this lifecycle hooks runs before the children' componentDidMount
+    componentWillMount() {
       console.log("axios-withError:", axios);
       axios.interceptors.request.use(req => {
         this.setState({
