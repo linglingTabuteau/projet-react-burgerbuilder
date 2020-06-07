@@ -40,7 +40,8 @@ class BurgerBuilder extends Component {
 
   componentDidMount() {
     // attention: it needs to add .json at the end of the url for using the database
-    axios.get('https://react-my-burger-3b8d4.firebaseio.com/ingrediants.json')
+    // axios.get('https://react-my-burger-3b8d4.firebaseio.com/ingrediants.json')
+    axios.get('/ingrediants.json')
       .then(res =>
         this.setState({
           ingredients: res.data

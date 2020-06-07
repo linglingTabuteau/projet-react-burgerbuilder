@@ -10,22 +10,31 @@ const withErrorHandler = (WrappedComponent, axios) => {
       error: null,
     }
 
-    // use componentWillMount because this lifecycle hooks runs before the children' componentDidMount
+    // use componentWillMount because this lifecycle methods(hooks) runs before the children' componentDidMount
     componentWillMount() {
       console.log("axios-withError:", axios);
-      axios.interceptors.request.use(req => {
+      // add interceptors in order to edit request config and response globally and always return request (conifg) 
+      this.reqInterceptor = axios.interceptors.request.use(req => {
         this.setState({
           error: null
         })
         return req;
+      }, error => {
+        console.log("errorReq:", error, "errorPromiseReject:", Promise.reject.error);
       });
 
-      axios.interceptors.response.use(res => res, error => {
+      this.resInterceptor = axios.interceptors.response.use(res => res, error => {
         console.log("error-response:", error)
         this.setState({
           error: error
         })
       })
+    }
+
+    // remove old interceptors
+    componentWillUnmount() {
+      axios.interceptors.request.eject(this.reqInterceptor);
+      axios.interceptors.response.eject(this.resInterceptor);
     }
 
     errorConfirmedHandler = () => {

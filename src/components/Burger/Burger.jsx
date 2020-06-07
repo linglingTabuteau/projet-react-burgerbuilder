@@ -21,8 +21,6 @@ const Burger = (props) => {
     return arr.concat(el);
   }, []);
 
-  console.log("transferIng:", transferedIngredients);
-
   if (transferedIngredients.length === 0) {
     transferedIngredients = <p>Please add the ingredients</p>
   }
