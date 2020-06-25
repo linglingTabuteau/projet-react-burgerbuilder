@@ -24,11 +24,12 @@ const BurgerSummary = (props) => {
       <Button
         btnType='Success'
         clicked={props.purchaseContinue}>Continue</Button>
-    <Button
-      btnType='Danger'
-      clicked={props.purchaseCancel}>cancel</Button>
+      <Button
+        btnType='Danger'
+        clicked={props.purchaseCancel}>cancel</Button>
     </Aux >
   );
 }
 
+// export default BurgerSummary;
 export default BurgerSummary;
