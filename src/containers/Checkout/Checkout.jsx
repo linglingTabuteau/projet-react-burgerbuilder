@@ -9,7 +9,8 @@ class Checkout extends Component {
     totalPrice: 0,
   }
 
-  componentDidMount() {
+  // use componentWillMount below in order to get this.state.ingredients, before rending Children <Burger />
+  componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
     let price = 0;
@@ -50,9 +51,11 @@ class Checkout extends Component {
           checkoutCancel={this.checkoutCancelHandler} />
         <Route
           path={this.props.match.path + '/contact-data'}
-          render={() => <ContactData
+          render={(props) => <ContactData
             ingredients={this.state.ingredients}
-            totalPrice={this.state.totalPrice} />} />
+            totalPrice={this.state.totalPrice}
+            // below is one method to pass route parameters to ContactData as we don't use component={ContactData} so it doesn't have access to Route parameters
+            {...props} />} />
       </div>
     );
   }

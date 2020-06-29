@@ -133,33 +133,6 @@ class BurgerBuilder extends Component {
       search: '?' + queryString,
     }
     );
-
-    // const order = {
-    //   ingredients: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: 'Lingling Tabuteau',
-    //     adress: {
-    //       street: 'Test 1',
-    //       zipCode: '33000',
-    //       country: 'France',
-    //     },
-    //     email: 'test@gmail.com'
-    //   },
-    //   delveryMethod: 'fastest'
-    // }
-    // this.setState({ loading: true })
-    // try {
-    //   // import to add .json in the end of url to send data to firebase
-    //   axios.post('/orders.json', order)
-    //     // .then(response => console.log("response puchaeContinueHandler:", response))
-    //     .then(res => {
-    //       this.setState({ loading: false, purchasing: false })
-    //     })
-    // } catch (error) {
-    //   console.log('errorPost:', error);
-    //   this.setState({ loading: false })
-    // }
   }
 
   render() {
