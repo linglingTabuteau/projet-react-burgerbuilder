@@ -6,6 +6,7 @@ const Burger = (props) => {
   let transferedIngredients = Object.keys(props.ingredients).map(
     keyIngredient => {
       // _ reprensents no value; accessing value by: objet[keyIngredient]
+      // ?? Array(props.ingredients[keyIngredient])
       return [...Array(props.ingredients[keyIngredient])].map(
         (_, i) => {
           return (<BurgerIngredient
