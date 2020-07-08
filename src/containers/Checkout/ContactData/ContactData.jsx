@@ -3,16 +3,66 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
 
 
 
 class ContactData extends Component {
   state = {
-    name: '',
-    email: '',
-    adress: {
-      adress: '',
-      postalCode: ''
+    orderForm: {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'your name'
+        },
+        value: 'your name'
+      },
+      street: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'your street'
+        },
+        value: 'your street'
+      },
+      zipCode: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Zip code'
+        },
+        value: ''
+      },
+      country: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'your country'
+        },
+        value: ''
+      },
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'your E-mail'
+        },
+        value: ''
+      },
+      delveryMethod: {
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            {
+              value: 'fastest', displayValue: 'fastest'
+            },
+            {
+              value: 'cheapest', displayValue: 'cheapest'
+            }
+          ]
+        }
+      }
     },
     totalPrice: 0,
     loading: false,
@@ -24,16 +74,6 @@ class ContactData extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
-      customer: {
-        name: 'Lingling Tabuteau',
-        adress: {
-          street: 'Test 1',
-          zipCode: '33000',
-          country: 'France',
-        },
-        email: 'test@gmail.com'
-      },
-      delveryMethod: 'fastest'
     }
     this.setState({ loading: true })
     try {
@@ -53,13 +93,26 @@ class ContactData extends Component {
   }
 
   render() {
+    let formElementArray = [];
+    for (let key in this.state.orderForm) {
+      formElementArray.push({
+        id: key,
+        config: this.state.orderForm[key]
+      });
+    }
 
     let form = (
       <form>
-        <input type="text" name="name" className={classes.Input} placeholder="your name" />
-        <input type="text" name="email" className={classes.Input} placeholder="your Mail" />
-        <input type="text" name="street" className={classes.Input} placeholder="your adress" />
-        <input type="text" name="postal" className={classes.Input} placeholder="postal code" />
+        {
+          formElementArray.map(formItem => (
+            <Input
+              elementType={formItem.config.elementType}
+              elementConfig={formItem.config.elementConfig}
+              placeholder={formItem.config.value}
+              key={formItem.id}
+            />
+          ))
+        }
         <Button
           btnType="Success"
           clicked={this.orderHandler}>Your Order</Button>
