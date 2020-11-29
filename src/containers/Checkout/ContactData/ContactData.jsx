@@ -90,7 +90,7 @@ class ContactData extends Component {
 
   checkValidity = (value, rules) => {
     let isValid = false;
-    if (rules.required) {
+    if (rules && rules.required) {
       isValid = value.trim() !== " ";
     }
     return isValid;
@@ -138,12 +138,12 @@ class ContactData extends Component {
     const updatedFormElement = {
       ...updatedOrderForm[inputIndentifier],
     };
-    updatedOrderForm.value = event.target.value;
+    updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
     );
-    updatedOrderForm[inputIndentifier] = updatedOrderForm;
+    updatedOrderForm[inputIndentifier] = updatedFormElement;
     console.log(updatedFormElement);
     this.setState({
       orderForm: updatedOrderForm,
