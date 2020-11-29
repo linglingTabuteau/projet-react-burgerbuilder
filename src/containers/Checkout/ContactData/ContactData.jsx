@@ -91,7 +91,7 @@ class ContactData extends Component {
   checkValidity = (value, rules) => {
     let isValid = false;
     if (rules && rules.required) {
-      isValid = value.trim() !== " ";
+      isValid = value.trim() !== "";
     }
     return isValid;
   };
