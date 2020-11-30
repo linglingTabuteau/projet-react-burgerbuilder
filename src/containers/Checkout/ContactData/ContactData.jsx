@@ -41,6 +41,9 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true,
+          // add more rules below
+          minLength: 5,
+          maxLength: 5,
         },
         valid: false,
       },
@@ -89,9 +92,18 @@ class ContactData extends Component {
   };
 
   checkValidity = (value, rules) => {
-    let isValid = false;
-    if (rules && rules.required) {
-      isValid = value.trim() !== "";
+    let isValid = true;
+    if (!rules) return true;
+
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+    if (rules.minLength) {
+      console.log("ok");
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
     }
     return isValid;
   };
@@ -118,7 +130,6 @@ class ContactData extends Component {
         .post("/orders.json", order)
         // .then(response => console.log("response puchaeContinueHandler:", response))
         .then((res) => {
-          console.log("ok ContactData");
           this.setState({ loading: false, purchasing: false });
           // push user to home page '/' after passing the order
           this.props.history.push("/");
@@ -163,10 +174,12 @@ class ContactData extends Component {
       <form onSubmit={this.orderHandler}>
         {formElementArray.map((formItem) => (
           <Input
+            key={formItem.id}
             elementType={formItem.config.elementType}
             elementConfig={formItem.config.elementConfig}
             placeholder={formItem.config.value}
-            key={formItem.id}
+            invalid={!formItem.config.valid}
+            shouldValite={formItem.config.validation}
             changed={(event) => this.inputChangedHandler(event, formItem.id)}
           />
         ))}
